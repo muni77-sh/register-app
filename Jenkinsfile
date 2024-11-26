@@ -13,14 +13,20 @@ pipeline {
 	    
 	stage("Checkout from SCM"){
 	        steps {
-		git branch: 'main', credentialsId: 'github', url: 'https://github.com/muni77-sh/register-app'
-	        }
+		    git branch: 'main', credentialsId: 'github', url: 'https://github.com/muni77-sh/register-app'
+	        } 
 	}
 	    
        stage("Build Application"){
-	       steps {
+	   steps {
 	       sh "mvn clean package"
 	       }
         }
+       stage("Test Application"){
+	   steps {
+	       sh "mvn test package"
+	   }
+       }
     }
+
 }
